@@ -87,6 +87,10 @@ namespace BreadHours
                 st.Orientation = StackOrientation.Horizontal;
                 st.HorizontalOptions = LayoutOptions.FillAndExpand;
 
+                var tap = new TapGestureRecognizer();
+                tap.Tapped += Tap_Tapped;
+                st.GestureRecognizers.Add(tap);
+
                 Label l1 = new Label();
                 l1.Text = (i + 1) + ".";
                 l1.VerticalOptions = LayoutOptions.Center;
@@ -116,6 +120,36 @@ namespace BreadHours
             }
 
             resultLabel.Text = "Hours: " + sumH + "h, Pay: " + sumPay + ", In bread: " + GetBreadCount(sumPay) + " (" + breads.ElementAt(breadPicker.SelectedIndex).Value + " each)";
+        }
+
+        private int GetIdTapped(StackLayout st)
+        {
+            for(int i= 0; i < listActivieties.Children.Count; i++)
+            {
+                if (st == listActivieties.Children[i])
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private async void Tap_Tapped(object sender, EventArgs e)
+        {
+            if(sender is StackLayout)
+            {
+                StackLayout st = (StackLayout)sender;
+                if(GetIdTapped(st) != -1)
+                {
+                    bool answer = await DisplayAlert("Question?", "Are you sure to delete this item", "Yes", "No");
+
+                    if(answer)
+                    {
+                        activities.RemoveAt(GetIdTapped(st));
+                        RedrawActivieties();
+                    }
+                } 
+            }
         }
 
         private void breadPicker_SelectedIndexChanged(object sender, EventArgs e)
