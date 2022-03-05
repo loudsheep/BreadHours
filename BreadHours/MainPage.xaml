@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BreadHours.MainPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="#5e2a02" Padding="24" CornerRadius="0">
+            <Label Text="Check your bread" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+
+        <Label Text="Check how many breads can you buy for your work" FontSize="16" HorizontalOptions="Center"/>
+
+        <StackLayout>
+            <Entry x:Name="descEntry" Placeholder="Activity description" HorizontalOptions="FillAndExpand" MaxLength="30"/>
+            <Entry x:Name="hourEntry" Placeholder="Hours spent" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+            <Entry x:Name="payEntry" Placeholder="Pay per hour" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+
+            <Button x:Name="addBtn" Text="Add activity" BackgroundColor="#5e2a02" Clicked="addBtn_Clicked" TextColor="White" HorizontalOptions="Center"/>
+        </StackLayout>
+
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout x:Name="listActivieties" HorizontalOptions="FillAndExpand">
+                
+            </StackLayout>
+        </ScrollView>
+
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End">
+            <Label Text="Select Bread: " VerticalOptions="Center"/>
+            <Picker x:Name="breadPicker" HorizontalOptions="FillAndExpand" SelectedIndex="0" SelectedIndexChanged="breadPicker_SelectedIndexChanged"/>
+
+            <Label x:Name="resultLabel" FontSize="18" Text="Hours: 0h, Pay: 0, In bread: 0 (5 each)" FontAttributes="Bold"/>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
